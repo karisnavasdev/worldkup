@@ -52,17 +52,27 @@ function isAdminAuthed(req) {
   return parseCookies(req)[SESSION_COOKIE] === SESSION_TOKEN;
 }
 
-function setAdminCookie(res) {
+function isSecureRequest(req) {
+  if (req.headers["x-forwarded-proto"] === "https") return true;
+  return Boolean(req.socket.encrypted);
+}
+
+function adminCookieFlags(req) {
+  const secure = isSecureRequest(req) ? "; Secure" : "";
+  return `Path=/; HttpOnly; SameSite=Lax${secure}; Max-Age=`;
+}
+
+function setAdminCookie(req, res) {
   res.setHeader(
     "Set-Cookie",
-    `${SESSION_COOKIE}=${SESSION_TOKEN}; Path=/; HttpOnly; SameSite=Strict; Max-Age=86400`
+    `${SESSION_COOKIE}=${SESSION_TOKEN}; ${adminCookieFlags(req)}86400`
   );
 }
 
-function clearAdminCookie(res) {
+function clearAdminCookie(req, res) {
   res.setHeader(
     "Set-Cookie",
-    `${SESSION_COOKIE}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0`
+    `${SESSION_COOKIE}=; ${adminCookieFlags(req)}0`
   );
 }
 
@@ -194,7 +204,7 @@ async function handleAdminLogin(req, res) {
       json(res, 401, { ok: false, error: "invalid password" });
       return;
     }
-    setAdminCookie(res);
+    setAdminCookie(req, res);
     json(res, 200, { ok: true });
   } catch {
     json(res, 400, { error: "invalid request" });
@@ -202,7 +212,7 @@ async function handleAdminLogin(req, res) {
 }
 
 function handleAdminLogout(req, res) {
-  clearAdminCookie(res);
+  clearAdminCookie(req, res);
   json(res, 200, { ok: true });
 }
 
@@ -285,8 +295,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (urlPath === "/admin" || urlPath === "/admin.html") {
-    serveStatic("/admin.html", res);
+  if (urlPath === "/admin" || urlPath === "/admin.html" || urlPath === "/admin/") {
+    serveStatic("/admin/index.html", res);
     return;
   }
 

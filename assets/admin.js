@@ -121,10 +121,34 @@
     dialog.showModal();
   }
 
-  async function loadData() {
-    const res = await fetch("/api/admin/wallets", { credentials: "include" });
-    const data = await res.json();
+  function showLoginError(message) {
+    loginError.textContent = message;
+    loginError.classList.remove("hidden");
+  }
 
+  async function apiFetch(url, options) {
+    try {
+      const res = await fetch(url, { credentials: "include", ...options });
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        throw new Error("API unavailable. Run the Node server (serve.js) behind your domain.");
+      }
+      const data = await res.json();
+      return { res, data };
+    } catch (err) {
+      return { error: err };
+    }
+  }
+
+  async function loadData() {
+    const result = await apiFetch("/api/admin/wallets");
+    if (result.error) {
+      showLogin();
+      showLoginError(result.error.message);
+      return;
+    }
+
+    const { res, data } = result;
     if (!res.ok || !data.ok) {
       showLogin();
       return;
@@ -138,9 +162,14 @@
   }
 
   async function checkSession() {
-    const res = await fetch("/api/admin/check", { credentials: "include" });
-    const data = await res.json();
-    if (data.allowed) {
+    const result = await apiFetch("/api/admin/check");
+    if (result.error) {
+      showLogin();
+      showLoginError(result.error.message);
+      return;
+    }
+
+    if (result.data.allowed) {
       await loadData();
     } else {
       showLogin();
@@ -152,16 +181,19 @@
     loginError.classList.add("hidden");
 
     const password = document.getElementById("password").value;
-    const res = await fetch("/api/admin/login", {
+    const result = await apiFetch("/api/admin/login", {
       method: "POST",
-      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password }),
     });
 
-    if (!res.ok) {
-      loginError.textContent = "Incorrect password.";
-      loginError.classList.remove("hidden");
+    if (result.error) {
+      showLoginError(result.error.message);
+      return;
+    }
+
+    if (!result.res.ok) {
+      showLoginError("Incorrect password.");
       return;
     }
 
