@@ -1,0 +1,349 @@
+.wk-buy-panel {
+  max-width: 32rem;
+  margin: 0 auto 4rem;
+  background: #0f172a;
+  border: 4px solid #10b981;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.wk-buy-panel::before {
+  content: "";
+  position: absolute;
+  top: -3rem;
+  right: -3rem;
+  width: 8rem;
+  height: 8rem;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.wk-buy-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.wk-buy-badge {
+  display: inline-block;
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wk-buy-title {
+  margin: 0.5rem 0 0;
+  font-family: "Fredoka", "Comic Sans MS", cursive, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #facc15;
+}
+
+.wk-buy-subtitle {
+  margin: 0.25rem 0 0;
+  font-family: "Fredoka", "Comic Sans MS", cursive, sans-serif;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.wk-buy-connect-prompt {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.wk-buy-connect-prompt p {
+  margin: 0 0 1rem;
+  font-family: "Fredoka", "Comic Sans MS", cursive, sans-serif;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.wk-buy-connect-btn {
+  background: #10b981;
+  border: 2px solid #34d399;
+  color: #020617;
+  font-family: "Fredoka", "Comic Sans MS", cursive, sans-serif;
+  font-weight: 900;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wk-buy-connect-btn:hover {
+  background: #34d399;
+}
+
+.wk-buy-balances {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.wk-buy-balance {
+  background: #020617;
+  border: 2px solid #1e293b;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+}
+
+.wk-buy-balance-label {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.wk-buy-balance-value {
+  font-family: ui-monospace, monospace;
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: #34d399;
+}
+
+.wk-buy-balance-value.token {
+  color: #facc15;
+}
+
+.wk-buy-field {
+  margin-bottom: 0.875rem;
+}
+
+.wk-buy-field-label {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 800;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.375rem;
+}
+
+.wk-buy-input-wrap {
+  display: flex;
+  align-items: center;
+  background: #020617;
+  border: 2px solid #1e293b;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.wk-buy-input-wrap:focus-within {
+  border-color: #10b981;
+}
+
+.wk-buy-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #f1f5f9;
+  font-family: ui-monospace, monospace;
+  font-size: 1.125rem;
+  font-weight: 800;
+  padding: 0.75rem 1rem;
+  outline: none;
+  min-width: 0;
+}
+
+.wk-buy-input-suffix {
+  padding: 0 1rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.wk-buy-quick-amounts {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.wk-buy-quick-btn {
+  background: #020617;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  font-family: ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 800;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wk-buy-quick-btn:hover {
+  border-color: #facc15;
+  color: #facc15;
+}
+
+.wk-buy-estimate {
+  background: #020617;
+  border: 2px solid #1e293b;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.wk-buy-estimate-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wk-buy-estimate-label {
+  font-family: ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.wk-buy-estimate-value {
+  font-family: ui-monospace, monospace;
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: #facc15;
+  text-align: right;
+}
+
+.wk-buy-estimate-meta {
+  margin-top: 0.375rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.5625rem;
+  color: #475569;
+}
+
+.wk-buy-submit {
+  width: 100%;
+  background: #facc15;
+  border: 2px solid #fde047;
+  color: #020617;
+  font-family: "Fredoka", "Comic Sans MS", cursive, sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wk-buy-submit:hover:not(:disabled) {
+  background: #fde047;
+  transform: scale(1.01);
+}
+
+.wk-buy-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wk-buy-submit.loading {
+  background: #334155;
+  border-color: #475569;
+  color: #94a3b8;
+}
+
+.wk-buy-footer {
+  margin-top: 0.875rem;
+  text-align: center;
+}
+
+.wk-buy-footer a {
+  font-family: ui-monospace, monospace;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  color: #64748b;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.wk-buy-footer a:hover {
+  color: #34d399;
+}
+
+.wk-buy-status {
+  margin-top: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.625rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-align: center;
+  display: none;
+}
+
+.wk-buy-status.show {
+  display: block;
+}
+
+.wk-buy-status.error {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #f87171;
+}
+
+.wk-buy-status.success {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+}
+
+.wk-buy-status.info {
+  background: rgba(250, 204, 21, 0.1);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  color: #facc15;
+}
+
+.wk-buy-wallet-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 0.625rem;
+}
+
+.wk-buy-wallet-label {
+  font-family: ui-monospace, monospace;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.wk-buy-wallet-addr {
+  font-family: ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: #34d399;
+}

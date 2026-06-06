@@ -26,6 +26,15 @@
 
   function saveState() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    notifyWalletChange();
+  }
+
+  function notifyWalletChange() {
+    window.dispatchEvent(
+      new CustomEvent("worldkup-wallet-change", {
+        detail: { address: state.address, type: state.type },
+      })
+    );
   }
 
   function shortAddress(addr) {
@@ -258,6 +267,17 @@
       finishInject();
     }, 2000);
   }
+
+  window.WorldKupWallet = {
+    getAddress() {
+      return state.address;
+    },
+    isConnected() {
+      return Boolean(state.address);
+    },
+    connect: connectPhantom,
+    disconnect,
+  };
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
