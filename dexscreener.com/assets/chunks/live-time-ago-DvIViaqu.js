@@ -1,0 +1,1 @@
+import{a5 as s,a6 as r,n as i,a7 as o}from"../entries/pages_catch-all.wndQOVo_.js";const m=e=>{var a;const t=s(Date.now(),(a=r().data.current)==null?void 0:a.time);return i.jsx(o,{...e,initialNow:t})};export{m as L};
